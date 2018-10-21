@@ -1,3 +1,4 @@
+from __future__ import division
 class textcolor:
 	bg   ="\x1b[48;5;"
 	color="\x1b[38;5;"
@@ -6,9 +7,19 @@ class textcolor:
 class nodes:
 	under = []
 	on = None
-	x = None
-	y = None
 	win = 0
+	search = 0
+	def __init__(self,a,b):
+		x=a
+		y=b
+	def sort(self):
+		under2=[]
+		for i in range(len(self.under)):
+			under2.append([self.under[i].win/self.under[i].search,self.under[i]])
+		print under2
+		under2.sort(key=lambda a:a[0],reverse=True)
+		for i in range(len(self.under)):
+			self.under[i]=under2[i][1]
 def dump():
 	a=''
 	for x in range(8):
@@ -23,7 +34,7 @@ def dump():
 	print (u'{}'.format(a))
 step=[[1,1],[1,0],[1,-1],[0,1],[0,-1],[-1,1],[-1,0],[-1,-1]];
 board=[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,1,2,0,0,0],[0,0,0,2,1,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]]
-root=nodes()
+root=nodes(None,None)
 def ww():
 	b=w=0
 	for x in range(8):
@@ -84,6 +95,8 @@ def allplay(x,y,color):
 			ty-=step[i][1]
 		continue
 def mcts(color):
-	global root
+	node=nodes()
+	while not node.nuder==[]:
+		node=node.under[0]
 	psb=possible(color)
-	
+	n=len(psb)
